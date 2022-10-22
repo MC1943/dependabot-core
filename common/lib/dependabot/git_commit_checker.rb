@@ -233,15 +233,7 @@ module Dependabot
     end
 
     def local_tags
-      tags = local_repo_git_metadata_fetcher.tags
-
-      if dependency_source_details&.fetch(:ref, nil)&.start_with?("tags/")
-        tags = tags.map do |tag|
-          tag.dup.tap { |t| t.name = "tags/#{tag.name}" }
-        end
-      end
-
-      tags
+      local_repo_git_metadata_fetcher.tags
     end
 
     def commit_included_in_tag?(tag:, commit:, allow_identical: false)
