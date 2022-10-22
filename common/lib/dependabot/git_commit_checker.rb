@@ -52,11 +52,11 @@ module Dependabot
       # If the specified `ref` is actually a tag, we're pinned
       return true if local_upload_pack.match?(%r{ refs/tags/#{ref}$})
 
-      # If the specified `ref` is actually a branch, we're NOT pinned
-      return false if local_upload_pack.match?(%r{ refs/heads/#{ref}$})
+      # Assume we're pinned unless the specified `ref` is actually a branch
+      return true unless local_upload_pack.match?(%r{ refs/heads/#{ref}$})
 
-      # Otherwise, assume we're pinned
-      true
+      # If the specified `ref` is actually a branch, we're pinned if the branch looks like a version
+      version_tag?(ref)
     end
 
     def pinned_ref_looks_like_version?
@@ -110,7 +110,7 @@ module Dependabot
             tag: t.name,
             version: version_class.new(version),
             commit_sha: t.commit_sha,
-            tag_sha: t.tag_sha
+            tag_sha: t.ref_sha
           }
         end
     end
@@ -125,7 +125,7 @@ module Dependabot
         tag: tag.name,
         version: version_class.new(version),
         commit_sha: tag.commit_sha,
-        tag_sha: tag.tag_sha
+        tag_sha: tag.ref_sha
       }
     end
 
@@ -233,7 +233,7 @@ module Dependabot
     end
 
     def local_tags
-      local_repo_git_metadata_fetcher.tags
+      local_repo_git_metadata_fetcher.refs_for_upload_pack
     end
 
     def commit_included_in_tag?(tag:, commit:, allow_identical: false)

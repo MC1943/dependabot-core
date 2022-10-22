@@ -25,6 +25,10 @@ module Dependabot
       @tags ||= tags_for_upload_pack
     end
 
+    def refs_for_upload_pack
+      @refs_for_upload_pack ||= parse_refs_for_upload_pack
+    end
+
     def ref_names
       refs_for_upload_pack.map(&:name)
     end
@@ -112,10 +116,6 @@ module Dependabot
             commit_sha: ref.commit_sha
           )
         end
-    end
-
-    def refs_for_upload_pack
-      @refs_for_upload_pack ||= parse_refs_for_upload_pack
     end
 
     def parse_refs_for_upload_pack
