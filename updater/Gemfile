@@ -2,38 +2,29 @@
 
 source "https://rubygems.org"
 
-gem "dependabot-bundler", path: "../bundler"
-gem "dependabot-cargo", path: "../cargo"
-gem "dependabot-common", path: "../common"
-gem "dependabot-composer", path: "../composer"
-gem "dependabot-docker", path: "../docker"
-gem "dependabot-elm", path: "../elm"
-gem "dependabot-github_actions", path: "../github_actions"
-gem "dependabot-git_submodules", path: "../git_submodules"
-gem "dependabot-go_modules", path: "../go_modules"
-gem "dependabot-gradle", path: "../gradle"
-gem "dependabot-hex", path: "../hex"
-gem "dependabot-maven", path: "../maven"
-gem "dependabot-npm_and_yarn", path: "../npm_and_yarn"
-gem "dependabot-nuget", path: "../nuget"
-gem "dependabot-pub", path: "../pub"
-gem "dependabot-python", path: "../python"
-gem "dependabot-terraform", path: "../terraform"
+gemspec path: "../bundler", development_group: :test
+gemspec path: "../cargo", development_group: :test
+gemspec path: "../common", development_group: :test
+gemspec path: "../composer", development_group: :test
+gemspec path: "../docker", development_group: :test
+gemspec path: "../elm", development_group: :test
+gemspec path: "../github_actions", development_group: :test
+gemspec path: "../git_submodules", development_group: :test
+gemspec path: "../go_modules", development_group: :test
+gemspec path: "../gradle", development_group: :test
+gemspec path: "../hex", development_group: :test
+gemspec path: "../maven", development_group: :test
+gemspec path: "../npm_and_yarn", development_group: :test
+gemspec path: "../nuget", development_group: :test
+gemspec path: "../pub", development_group: :test
+gemspec path: "../python", development_group: :test
+gemspec path: "../terraform", development_group: :test
 
 gem "activesupport", "~> 6.1.4"
 gem "http", "~> 5.1"
 gem "octokit", "4.25.1"
 gem "sentry-raven", "~> 3.1"
 gem "terminal-table", "~> 3.0.2"
-
-group :test do
-  gem "debug", "~> 1.6.2"
-  gem "rspec", "~> 3.11"
-  gem "rubocop", "~> 1.37.1"
-  gem "rubocop-performance", "~> 1.15.0"
-  gem "vcr", "~> 6.1"
-  gem "webmock", "~> 3.18"
-end
 
 group :development do
   gem "licensed", "~> 3.7", require: false
